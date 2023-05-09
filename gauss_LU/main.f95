@@ -1,17 +1,16 @@
 PROGRAM gauss_ppal
-    
+
     USE mod_clreal
     IMPLICIT NONE
     INTEGER::n
-    REAL(clreal), ALLOCATABLE :: A(:,:),AA(:,:),B(:),BB(:),U(:),R(:)
-    REAL(clreal)::deter
+    REAL(clreal), ALLOCATABLE :: A(:,:),B(:),U(:)
 
     print*, "======GAUSS LU======"
 
     read*,n
     print*,"Tamaño: ",n
 
-    ALLOCATE (A(n,n),AA(n,n),b(n),bb(n),u(n),r(n))
+    ALLOCATE (A(n,n),b(n),u(n))
 
     CALL lecmat(A,n)
     print*, "Matriz A:"
@@ -20,9 +19,14 @@ PROGRAM gauss_ppal
     read*,b
     print*, "Vector de términos independientes:", b
 
-    CALL gauss(n,A,b,u,deter)
-    PRINT*, deter
-    PRINT*, u
+    CALL gauss_LU(n,A)
+
+    print*, "Matriz modificada LU:"
+    CALL prinmat(A,n)
+
+    CALL descenso_L(n,A,b,u)
+    CALL remonte(n,A,u,b)
+    PRINT*, b
 
     DEALLOCATE(A,b,u)
 

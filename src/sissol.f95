@@ -30,7 +30,7 @@ end subroutine remonte
 subroutine descenso(n,A,b,u)
     !Subrutina que soluciona el sistema de ecuaciones lineales A*u = b cuando A es una matriz triangular INFERIOR
     !El sistema se soluciona por descenso
-    !Por ejemplo, con 3 variables, como el sistema es triangular superior se tiene que
+    !Por ejemplo, con 3 variables, como el sistema es triangular superior se tiene que 
     ! a(1,1)x                     = b(1)
     ! a(2,1)x + a(2,2)y           = b(2)
     ! a(3,1)x + a(3,2)y + a(3,3)z = b(3)
@@ -105,7 +105,7 @@ subroutine remonte_permutado(n,A,b,u,ip)
     implicit none
     integer,intent(in)::n,ip(n)
     real(kind=clreal),intent(in)::a(n,n)
-    real(kind=clreal),intent(inout)::b(n)
+    real(kind=clreal),intent(in)::b(n)
     real(kind=clreal),intent(out)::u(n)
     integer::i,ipi,j
     real(kind=clreal)::aux
@@ -116,6 +116,29 @@ subroutine remonte_permutado(n,A,b,u,ip)
         do j=i+1,n
             aux=aux+a(ipi,j)*u(j)
         end do
-        u(i)=(b(ipi)-aux)/a(ipi,i)
+        u(i)=(b(i)-aux)/a(ipi,i)
     end do
 end subroutine remonte_permutado
+
+subroutine descenso_L_permutado(n,A,b,u,ip)
+    !Descenso modificado para poder usarlo en Gauss con pivote parcial
+    !Nótese que se tiene implícito que la L tiene 1 en la diagonal
+    use mod_clreal
+    implicit none
+    integer,intent(in)::n,ip(n)
+    real(kind=clreal),intent(in)::a(n,n)
+    real(kind=clreal),intent(in)::b(n)
+    real(kind=clreal),intent(out)::u(n)
+    integer::i,ipi,j
+    real(kind=clreal)::aux
+
+    u(1)=b(ip(1))
+    do i=2,n
+        aux=0.0
+        ipi=ip(i)
+        do j=1,i-1
+            aux=aux+a(ipi,j)*u(j)
+        end do
+        u(i)=b(i)-aux
+    end do
+end subroutine descenso_L_permutado

@@ -18,8 +18,6 @@ do
         
         cd "$dir"
         makef
-
-        echo "${copied[@]}"
         
         #Quitar solo los copiados
         for file in "${copied[@]}"
