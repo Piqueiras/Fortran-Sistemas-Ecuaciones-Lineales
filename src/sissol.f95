@@ -105,7 +105,7 @@ subroutine remonte_permutado(n,A,b,u,ip)
     implicit none
     integer,intent(in)::n,ip(n)
     real(kind=clreal),intent(in)::a(n,n)
-    real(kind=clreal),intent(in)::b(n)
+    real(kind=clreal),intent(inout)::b(n)
     real(kind=clreal),intent(out)::u(n)
     integer::i,ipi,j
     real(kind=clreal)::aux
@@ -116,7 +116,7 @@ subroutine remonte_permutado(n,A,b,u,ip)
         do j=i+1,n
             aux=aux+a(ipi,j)*u(j)
         end do
-        u(i)=(b(i)-aux)/a(ipi,i)
+        u(i)=(b(ipi)-aux)/a(ipi,i)
     end do
 end subroutine remonte_permutado
 

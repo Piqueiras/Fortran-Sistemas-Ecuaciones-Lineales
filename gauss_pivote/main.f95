@@ -3,9 +3,10 @@ PROGRAM main
     USE mod_clreal
     IMPLICIT NONE
 
-    INTEGER::n,info
-    REAL(clreal),ALLOCATABLE::A(:,:),b(:),u(:),r(:),ip(:)
+    INTEGER::n,info,i,j
+    REAL(clreal),ALLOCATABLE::A(:,:),b(:),u(:),r(:)
     REAL(clreal)::deter
+    INTEGER,ALLOCATABLE::ip(:)
 
     print*, "======GAUSS PIVOTE======"
 
@@ -30,11 +31,15 @@ PROGRAM main
     end if
 
     CALL gauss_pivote(n,A,b,deter,ip)
-    
 
-    print*, "Nueva matriz reducida:"
-    CALL prinmat(A,n)
-    print*, "Nuevo vector independiente:", b
+    print*, 'Matriz pivotada y reducida:'
+    do i=1,n
+        print*, (0._clreal,j=1,i-1),a(ip(i),i:n) 
+    end do
+
+    print*, 'Vector independiente permutado y modificado:', b(ip(1:n))
+
+    print*, "Permutacion: ",ip
 
     CALL remonte_permutado(n,A,b,u,ip)
 
