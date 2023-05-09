@@ -8,6 +8,8 @@ PROGRAM main
     INTEGER :: n
     REAL(clreal) :: eps
 
+    print*, "======JACOBI======"
+
     read*, n
     print*, "Tamaño: ",n
 

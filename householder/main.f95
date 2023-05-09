@@ -7,6 +7,8 @@ PROGRAM main
     REAL(clreal),ALLOCATABLE::A(:,:),b(:),u(:),r(:),Acopia(:,:),Bcopia(:)
     REAL(clreal)::deter
 
+    print*, "======HOUSEHOLDER======"
+
     read*,n
     print*,"Tamaño: ",n
 

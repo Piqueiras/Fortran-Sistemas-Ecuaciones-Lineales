@@ -7,6 +7,8 @@ PROGRAM main
     REAL(clreal),ALLOCATABLE::A(:,:),b(:),u(:),r(:)
     REAL(clreal)::deter
 
+    print*, "======GAUSS======"
+
     read*,n
     print*,"Tamaño: ",n
 

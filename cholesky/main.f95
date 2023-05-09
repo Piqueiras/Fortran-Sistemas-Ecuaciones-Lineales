@@ -7,6 +7,8 @@ PROGRAM main
     INTEGER,ALLOCATABLE::ip(:)
     REAL(clreal),ALLOCATABLE::A(:,:),b(:),u(:),v(:)
 
+    print*, "======CHOLESKY======"
+
     read*,n
     print*,"Tamaño: ",n
 

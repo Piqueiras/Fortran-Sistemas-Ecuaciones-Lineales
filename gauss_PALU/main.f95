@@ -8,6 +8,8 @@ PROGRAM main
     REAL(clreal),ALLOCATABLE::A(:,:),b(:),u(:),r(:)
     REAL(clreal)::deter
 
+    print*, "======GAUSS LU PIVOTE======"
+
     read*,n
     print*,"Tamaño: ",n
 

@@ -4,9 +4,11 @@ program main
 	integer :: n	
 	real (kind = clreal) :: deter
 	real (kind = clreal), allocatable :: a(:,:), aa(:,:), b(:), x(:), y(:), r(:)
+
+    print*, "======DOOLITTLE======"
 	
-    print*, "Tamaño matriz: "
-	read*, n
+    read*,n
+    print*,"Tamaño: ",n
 	
 	allocate (a(n,n), b(n), x(n), y(n), r(n))
 	

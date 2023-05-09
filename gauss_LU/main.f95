@@ -6,13 +6,19 @@ PROGRAM gauss_ppal
     REAL(clreal), ALLOCATABLE :: A(:,:),AA(:,:),B(:),BB(:),U(:),R(:)
     REAL(clreal)::deter
 
-    READ*, n
+    print*, "======GAUSS LU======"
+
+    read*,n
+    print*,"Tamaño: ",n
+
     ALLOCATE (A(n,n),AA(n,n),b(n),bb(n),u(n),r(n))
 
     CALL lecmat(A,n)
+    print*, "Matriz A:"
     CALL prinmat(A,n)
-    READ*, b
-    PRINT*, b
+
+    read*,b
+    print*, "Vector de términos independientes:", b
 
     CALL gauss(n,A,b,u,deter)
     PRINT*, deter
