@@ -3,23 +3,31 @@ PROGRAM main
     USE mod_clreal
     IMPLICIT NONE
 
-    INTEGER::n
+    INTEGER::n,info
     INTEGER,ALLOCATABLE::ip(:)
     REAL(clreal),ALLOCATABLE::A(:,:),b(:),u(:),v(:)
 
     print*, "======CHOLESKY======"
 
+    read*, info
+
     read*,n
-    print*,"Tamaño: ",n
-
-    ALLOCATE(A(n,n),b(n),u(n),v(n))
-
+    if ( info==1 ) then
+        print*,"Tamaño: ",n
+    end if
+    
+	ALLOCATE (A(n,n), b(n), u(n), v(n))
+	
     CALL lecmat(A,n)
-    print*, "Matriz A:"
-    CALL prinmat(A,n)
-
+    if ( info==1 ) then
+        print*, "Matriz A:"
+        CALL prinmat(A,n)
+    end if
+    
     read*,b
-    print*, "Vector de términos independientes:", b
+    if ( info==1 ) then
+        print*, "Vector de términos independientes:", b
+    end if
 
     CALL cholesky(n,A)
 

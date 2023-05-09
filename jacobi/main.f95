@@ -5,22 +5,31 @@ PROGRAM main
 
     REAL(clreal), DIMENSION(:,:), ALLOCATABLE :: A
     REAL(clreal), DIMENSION(:), ALLOCATABLE :: b,u
-    INTEGER :: n
+    INTEGER :: n,info
     REAL(clreal) :: eps
 
     print*, "======JACOBI======"
 
-    read*, n
-    print*, "Tamaño: ",n
+    read*, info
 
-    ALLOCATE(A(n,n),b(n),u(n))
-
+    read*,n
+    if ( info==1 ) then
+        print*,"Tamaño: ",n
+    end if
+    
+	ALLOCATE (A(n,n), b(n), u(n))
+	
     CALL lecmat(A,n)
-    print*, "Matriz A: "
-    CALL prinmat(A,n)
+    if ( info==1 ) then
+        print*, "Matriz A:"
+        CALL prinmat(A,n)
+    end if
+    
 
-    read*, b
-    print*, "Vector b: ",b
+    read*,b
+    if ( info==1 ) then
+        print*, "Vector de términos independientes:", b
+    end if
 
     read*,eps
     print*, "Epsilon: ", eps

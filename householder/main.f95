@@ -3,30 +3,34 @@ PROGRAM main
     USE mod_clreal
     IMPLICIT NONE
 
-    INTEGER::n
-    REAL(clreal),ALLOCATABLE::A(:,:),b(:),u(:),r(:),Acopia(:,:),Bcopia(:)
+    INTEGER::n,info
+    REAL(clreal),ALLOCATABLE::A(:,:),b(:),u(:),r(:)
     REAL(clreal)::deter
 
     print*, "======HOUSEHOLDER======"
 
+    read*, info
+
     read*,n
-    print*,"Tamaño: ",n
-
-    ALLOCATE(A(n,n),b(n),u(n),r(n),Acopia(n,n),Bcopia(n))
-
+    if ( info==1 ) then
+        print*,"Tamaño: ",n
+    end if
+    
+	ALLOCATE (A(n,n), b(n), u(n), r(n))
+	
     CALL lecmat(A,n)
-    print*, "Matriz A:"
-    CALL prinmat(A,n)
-
-    Acopia=A
-
+    if ( info==1 ) then
+        print*, "Matriz A:"
+        CALL prinmat(A,n)
+    end if
+    
     read*,b
-    print*, "Vector de términos independientes:", b
-
-    Bcopia=b
+    if ( info==1 ) then
+        print*, "Vector de términos independientes:", b
+    end if
 
     CALL householder(n,A,b,deter)
-    print*, "Determinante: ",deter
+    
 
     print*, "Nueva matriz reducida:"
     CALL prinmat(A,n)
@@ -35,7 +39,5 @@ PROGRAM main
     CALL remonte(n,A,b,u)
 
     print*, "Solución: ",u
-
-
-
+    print*, "Determinante: ",deter
 END PROGRAM main

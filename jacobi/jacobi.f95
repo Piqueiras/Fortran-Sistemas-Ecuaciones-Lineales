@@ -8,7 +8,7 @@ subroutine jacobi(n,A,b,u,eps)
     real(clreal)::uold(n),error
     error = 69420.0
     k=0
-    do while ( error>eps .and. k<100)
+    do while ( error>eps .and. k<50)
         uold=u
         do i = 1, n
             u(i)=(b(i)-sum(a(i,1:i-1)*uold(1:i-1))-sum(a(i,i+1:n)*uold(i+1:n)))/a(i,i)

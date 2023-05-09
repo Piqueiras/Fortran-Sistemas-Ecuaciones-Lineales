@@ -1,23 +1,31 @@
 program main
 	use mod_clreal
 	implicit none
-	integer :: n	
+	integer :: n, info
 	real (kind = clreal) :: deter
 	real (kind = clreal), allocatable :: a(:,:), aa(:,:), b(:), x(:), y(:), r(:)
 
     print*, "======DOOLITTLE======"
 	
+    read*, info
+
     read*,n
-    print*,"Tamaño: ",n
+    if ( info==1 ) then
+        print*,"Tamaño: ",n
+    end if
 	
-	allocate (a(n,n), b(n), x(n), y(n), r(n))
+	ALLOCATE(a(n,n), b(n), x(n), y(n), r(n))
 	
     CALL lecmat(A,n)
-    print*, "Matriz A:"
-    CALL prinmat(A,n)
-
+    if ( info==1 ) then
+        print*, "Matriz A:"
+        CALL prinmat(A,n)
+    end if
+    
     read*,b
-    print*, "Vector de términos independientes:", b
+    if ( info==1 ) then
+        print*, "Vector de términos independientes:", b
+    end if
 
 	call doolittle_LU (n, a, deter)
 	call descenso_L(n, a, b, y)
@@ -26,7 +34,7 @@ program main
     print*, "Factorizacion: "
     CALL prinmat(A,n)
 
-    print*, "Solucion: ", x
+    print*, "Solución: ", x
 
     print*, "Determinante: ", deter
 	
