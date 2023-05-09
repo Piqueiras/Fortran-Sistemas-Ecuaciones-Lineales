@@ -30,6 +30,6 @@ PROGRAM main
 
     print*, "Solución: ",u
 
-    DEALLOCATE(A(n,n),b(n),u(n),r(n))
+    DEALLOCATE(A,b,u,r)
 
 END PROGRAM main

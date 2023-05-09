@@ -12,15 +12,14 @@ do
         for file in src/*
         do
             dest="$dir/${file##*/}"
-            if [ ! -e "$dest" ]
-            then
-                cp -r "$file" "$dir"
-                copied+=("$dest")
-            fi
+            cp -r "$file" "$dir"
+            copied+=("${file##*/}")
         done
         
         cd "$dir"
         makef
+
+        echo "${copied[@]}"
         
         #Quitar solo los copiados
         for file in "${copied[@]}"
