@@ -7,6 +7,7 @@ PROGRAM main
     REAL(clreal), DIMENSION(:), ALLOCATABLE :: b,u
     INTEGER :: n,info
     REAL(clreal) :: eps
+    LOGICAL::dominante
 
     print*, "======JACOBI======"
 
@@ -33,6 +34,10 @@ PROGRAM main
 
     read*,eps
     print*, "Epsilon: ", eps
+
+    if ( .not. dominante(A,n) ) then
+        stop "La matriz no es apta para Jacobi"
+    end if
 
     CALL jacobi(n,A,b,u,eps)
 
