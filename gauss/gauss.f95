@@ -28,7 +28,7 @@ subroutine gauss(n,A,b,deter)
             
             A(i,k+1:n)=A(i,k+1:n)-z*A(k,k+1:n) !Así se hace más facil la transformación
             b(i)=b(i)-z*b(k) !También tenemos que hacer lo mismo con el vector de términos independientes
-            a(i,k)=z !Guardamos el factor de multiplicación. Por si acaso. Total, la otra opción era ponerlo a 0.
+            a(i,k)=0 !Se podria guardar z, pero lo dejamos a 0 porque es Gauss solo
         enddo
         deter = deter * a(k,k)
     enddo

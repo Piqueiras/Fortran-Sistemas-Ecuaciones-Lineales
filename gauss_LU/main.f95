@@ -2,8 +2,9 @@ PROGRAM gauss_ppal
 
     USE mod_clreal
     IMPLICIT NONE
-    INTEGER::n,info
+    INTEGER::n,info,i
     REAL(clreal), ALLOCATABLE :: A(:,:),B(:),U(:)
+    REAL(clreal)::deter
 
     print*, "======GAUSS LU======"
 
@@ -32,9 +33,15 @@ PROGRAM gauss_ppal
     print*, "Matriz modificada LU:"
     CALL prinmat(A,n)
 
+    deter=1
+    do i = 1, n
+        deter=deter*A(i,i)
+    end do
+
     CALL descenso_L(n,A,b,u)
     CALL remonte(n,A,u,b)
     PRINT*, "Soulución:", b
+    print*, "Determinante: ",deter
 
     DEALLOCATE(A,b,u)
 

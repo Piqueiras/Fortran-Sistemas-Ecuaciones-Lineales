@@ -32,7 +32,7 @@ PROGRAM main
     CALL gauss(n,A,b,deter)
     
 
-    print*, "Nueva matriz reducida (abajo se guardan los coeficientes):"
+    print*, "Nueva matriz reducida:"
     CALL prinmat(A,n)
     print*, "Nuevo vector independiente:", b
 
