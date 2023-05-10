@@ -3,7 +3,7 @@ PROGRAM main
     USE mod_clreal
     IMPLICIT NONE
 
-    INTEGER::n,info
+    INTEGER::n,info,i,j
     INTEGER,ALLOCATABLE::ip(:)
     REAL(clreal),ALLOCATABLE::A(:,:),b(:),u(:),r(:)
     REAL(clreal)::deter
@@ -33,15 +33,17 @@ PROGRAM main
     CALL gauss_PALU(n,A,deter,ip)
     
 
-    print*, "Nueva matriz reducida:"
-    CALL prinmat(A,n)
+    print*, 'Matriz pivotada y factorizada:'
+    do i=1,n
+        print*, a(ip(i),1:n) 
+    end do
 
     print*, "Permutacion:",ip
 
     CALL descenso_L_permutado(n,A,b,u,ip)
-    CALL remonte_permutado(n,A,u,b,ip)
+    CALL remonte_permutado_LU(n,A,u,b,ip)
    
 
-    print*, "Solución: ",b, u
+    print*, "Solución: ",b
     print*, "Determinante: ",deter
 END PROGRAM main

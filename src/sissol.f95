@@ -120,6 +120,27 @@ subroutine remonte_permutado(n,A,b,u,ip)
     end do
 end subroutine remonte_permutado
 
+subroutine remonte_permutado_LU(n,A,b,u,ip)
+    !Remonte modificado para poder usarlo en factorización LU con pivote
+    use mod_clreal
+    implicit none
+    integer,intent(in)::n,ip(n)
+    real(kind=clreal),intent(in)::a(n,n)
+    real(kind=clreal),intent(inout)::b(n)
+    real(kind=clreal),intent(out)::u(n)
+    integer::i,ipi,j
+    real(kind=clreal)::aux
+
+    do i=n,1,-1
+        aux=0.0
+        ipi=ip(i)
+        do j=i+1,n
+            aux=aux+a(ipi,j)*u(j)
+        end do
+        u(i)=(b(i)-aux)/a(ipi,i)
+    end do
+end subroutine remonte_permutado_LU
+
 subroutine descenso_L_permutado(n,A,b,u,ip)
     !Descenso modificado para poder usarlo en Gauss con pivote parcial
     !Nótese que se tiene implícito que la L tiene 1 en la diagonal
@@ -139,6 +160,6 @@ subroutine descenso_L_permutado(n,A,b,u,ip)
         do j=1,i-1
             aux=aux+a(ipi,j)*u(j)
         end do
-        u(i)=b(i)-aux
+        u(i)=b(ipi)-aux
     end do
 end subroutine descenso_L_permutado
