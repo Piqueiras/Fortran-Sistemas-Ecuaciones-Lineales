@@ -3,7 +3,7 @@ subroutine gauss_PALU(n,A,deter,ip)
     use mod_clreal
     implicit none
     integer::i,j,k,cont,ipi,ipk,ipiv
-    real(clreal)::piv,factor,eps
+    real(clreal)::piv,eps
     integer, intent(in)::n
     real(clreal), intent(inout)::a(n,n)
     real(clreal), intent(out)::deter
@@ -43,9 +43,9 @@ subroutine gauss_PALU(n,A,deter,ip)
         !Eliminacion
         do i=k+1,n
             ipi=ip(i)
-            factor=a(ipi,k)/piv
+            a(ipi,k)=a(ipi,k)/piv
             do j=k+1,n
-                a(ipi,j)=a(ipi,j)-factor*a(ipk,j)
+                a(ipi,j)=a(ipi,j)-a(ipi,k)*a(ipk,j)
             end do
         end do
     end do

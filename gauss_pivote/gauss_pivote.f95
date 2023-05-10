@@ -58,11 +58,3 @@ subroutine gauss_pivote(n,A,b,deter,ip)
 
     deter=deter*a(ip(n),n)*(-1)**cont
 end subroutine gauss_pivote
-
-subroutine gauss_PALU(n,A,P)
-    use mod_clreal
-    implicit none
-    integer,intent(in)::n
-    real(clreal),intent(inout)::A(n,n)
-    real(clreal),intent(out)::P(n,n)
-end subroutine gauss_PALU
