@@ -6,6 +6,10 @@ PROGRAM main
     INTEGER::n,info
     INTEGER,ALLOCATABLE::ip(:)
     REAL(clreal),ALLOCATABLE::A(:,:),b(:),u(:),v(:)
+    real :: start, finish
+	
+	call cpu_time (start)
+    
 
     print*, "======CHOLESKY======"
 
@@ -40,4 +44,7 @@ PROGRAM main
     print*, "Solución: ",v
 
     DEALLOCATE(a,b,u,v)
+    call cpu_time (finish)
+	
+	print*, 'Tiempo total de calculo: ',finish - start
 END PROGRAM main

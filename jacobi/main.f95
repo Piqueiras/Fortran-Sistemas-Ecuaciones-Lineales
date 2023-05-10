@@ -8,6 +8,10 @@ PROGRAM main
     INTEGER :: n,info
     REAL(clreal) :: eps
     LOGICAL::dominante
+    real :: start, finish
+	
+	call cpu_time (start)
+    
 
     print*, "======JACOBI======"
 
@@ -33,8 +37,10 @@ PROGRAM main
     end if
 
     read*,eps
-    print*, "Epsilon: ", eps
-
+    if ( info==1 ) then
+        print*, "Epsilon: ", eps
+    end if
+    
     if ( .not. dominante(A,n) ) then
         stop "La matriz no es apta para Jacobi"
     end if
@@ -43,4 +49,9 @@ PROGRAM main
 
     print*, "Resultado: ",u
 
+    DEALLOCATE(A,b,u)
+
+    call cpu_time (finish)
+	
+	print*, 'Tiempo total de calculo: ',finish - start
 END PROGRAM main

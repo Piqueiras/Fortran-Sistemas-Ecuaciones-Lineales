@@ -6,6 +6,10 @@ PROGRAM main
     INTEGER::n,info
     REAL(clreal),ALLOCATABLE::A(:,:),b(:),u(:),r(:)
     REAL(clreal)::deter
+    real :: start, finish
+	
+	call cpu_time (start)
+    
 
     print*, "======HOUSEHOLDER======"
 
@@ -40,4 +44,10 @@ PROGRAM main
 
     print*, "Solución: ",u
     print*, "Determinante: ",deter
+    
+    DEALLOCATE(A,b,u,r)
+    
+    call cpu_time (finish)
+	
+	print*, 'Tiempo total de calculo: ',finish - start
 END PROGRAM main

@@ -7,6 +7,9 @@ PROGRAM main
     INTEGER,ALLOCATABLE::ip(:)
     REAL(clreal),ALLOCATABLE::A(:,:),b(:),u(:),r(:)
     REAL(clreal)::deter
+    real :: start, finish
+	
+	call cpu_time (start)
 
     print*, "======GAUSS LU PIVOTE======"
 
@@ -46,4 +49,11 @@ PROGRAM main
 
     print*, "Solución: ",b
     print*, "Determinante: ",deter
+    
+    DEALLOCATE(A,b,u,r,ip)
+
+    call cpu_time (finish)
+	
+	print*, 'Tiempo total de calculo: ',finish - start
+
 END PROGRAM main

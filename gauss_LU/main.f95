@@ -5,6 +5,10 @@ PROGRAM gauss_ppal
     INTEGER::n,info,i
     REAL(clreal), ALLOCATABLE :: A(:,:),B(:),U(:)
     REAL(clreal)::deter
+    real :: start, finish
+	
+	call cpu_time (start)
+    
 
     print*, "======GAUSS LU======"
 
@@ -44,5 +48,8 @@ PROGRAM gauss_ppal
     print*, "Determinante: ",deter
 
     DEALLOCATE(A,b,u)
-
+    
+    call cpu_time (finish)
+	
+	print*, 'Tiempo total de calculo: ',finish - start
 END PROGRAM gauss_ppal

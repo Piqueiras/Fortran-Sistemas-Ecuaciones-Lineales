@@ -4,6 +4,10 @@ program main
 	integer :: n, info
 	real (kind = clreal) :: deter
 	real (kind = clreal), allocatable :: a(:,:), aa(:,:), b(:), x(:), y(:), r(:)
+    real :: start, finish
+	
+	call cpu_time (start)
+    
 
     print*, "======DOOLITTLE======"
 	
@@ -37,5 +41,10 @@ program main
     print*, "Solución: ", x
 
     print*, "Determinante: ", deter
+
+    DEALLOCATE(A,b,x,y,r)
+
+	call cpu_time (finish)
 	
+	print*, 'Tiempo total de calculo: ',finish - start
 end program main
