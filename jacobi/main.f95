@@ -41,9 +41,9 @@ PROGRAM main
         print*, "Epsilon: ", eps
     end if
     
-    if ( .not. dominante(A,n) ) then
-        stop "La matriz no es apta para Jacobi"
-    end if
+    !if ( .not. dominante(A,n) ) then
+    !    stop "La matriz no es apta para Jacobi"
+    !end if
 
     CALL jacobi(n,A,b,u,eps)
 

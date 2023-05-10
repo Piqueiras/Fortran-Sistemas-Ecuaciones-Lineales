@@ -17,7 +17,7 @@ do
         done
         
         cd "$dir"
-        makef
+        make
         
         #Quitar solo los copiados
         for file in "${copied[@]}"
