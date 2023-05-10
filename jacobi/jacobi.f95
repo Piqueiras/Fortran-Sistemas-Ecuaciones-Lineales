@@ -25,20 +25,24 @@ subroutine jacobi(n,A,b,u,eps)
 end subroutine jacobi
 
 logical function dominante(A, n)
+  use mod_clreal
   implicit none
   integer, intent(in) :: n
-  real, dimension(n,n), intent(in) :: A
+  real(clreal), dimension(n,n), intent(in) :: A
   integer :: i, j
-  real :: sum
+  real(clreal) :: sum
 
   dominante = .true.  ! Asumimos que si es
 
   do j = 1, n
     sum = 0.0
-    do i = 1, n
+    do i = 1, j-1
       sum = sum + abs(A(i,j))
     end do
-    if (sum - abs(A(j,j)) >= abs(A(j,j))) then
+    do i = j+1, n
+      sum = sum + abs(A(i,j))
+    end do
+    if (sum >= abs(A(j,j))) then
       dominante = .false.  ! A no es dominante
       return
     end if

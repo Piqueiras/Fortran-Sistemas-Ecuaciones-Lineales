@@ -1,8 +1,6 @@
 subroutine gauss(n,A,b,deter)
     !Subrutina que emplea reducción de Gauss para convertir la matriz en triangular superior
-    !En el resto de elementos se guardan los factores de multiplicado, así que la matriz resultante se va a tener que calcular siempre como triangular superior
     !Además se calcula el determinante gracias a los elementos diagonales
-    !Nótese que, por tanto, A queda descompuesta en su factorización LU, de la forma U+L-I (con I la identidad puesto que la diagonal de L se pierde, pero son todos 1s)
     use mod_clreal
     implicit none
     integer,intent(in)::n
